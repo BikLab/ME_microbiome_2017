@@ -37,7 +37,7 @@ for i in forward_list:
 #print(len(combos))
 
 # create separate columns with primer IDs and names for primer mixes
-count = 0
+count = 1
 for item in combos:
     f = item[0].split("-")[1]
     f = f.split("_")[0]
