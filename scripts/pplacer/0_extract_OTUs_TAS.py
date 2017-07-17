@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # A program for extracting nematoda OTU IDs
-# USAGE: python extract_OTUs_TAS.py input_file output_file
+# USAGE: python 0_extract_OTUs_TAS.py input_file output_file
 # Author: Taruna Aggarwal
 # Affiliation: University of California, Riverside
 # Date: 07/14/2017
