@@ -37,6 +37,6 @@ filter_taxa_from_otu_table.py \
 # filter the otu_table_mc2_w_tax_metazoaONLY.biom to remove samples that have no OTU counts
 filter_samples_from_otu_table.py -i $OTUS/filtered-biom-tables/otu_table_mc2_w_tax_metazoaONLY.biom -o $OTUS/filtered-biom-tables/otu_table_mc2_w_tax_metazoaONLY_allNemaSamples.biom -n 1
 
-
+# filter the original BIOM table to get all other taxa except Metazoa
 filter_otus_from_otu_table.py -i $OTUS/otu_table_mc2_w_tax.biom -o $OTUS/filtered-biom-tables/otu_table_mc2_w_tax_NOmetazoa.biom -e $OTUS/filtered-biom-tables/list-of-otus-MetazoaONLY.txt
 
