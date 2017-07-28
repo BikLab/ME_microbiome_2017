@@ -18,11 +18,11 @@ module load qiime
 
 # Step 0 - set file paths
 
-RAW=/rhome/taruna/shared/taruna/memb/data-raw/uc-davis/16S/fastqs
-COMBINED_BARCODES=/rhome/taruna/shared/taruna/memb/data-raw/uc-davis/16S/combined-barcodes
-COMBINED_FASTQS=/rhome/taruna/shared/taruna/memb/data-raw/uc-davis/16S/combined-fastqs
-MAP=/rhome/taruna/shared/taruna/memb/qiime-files/mapping
-SPLIT=/rhome/taruna/shared/taruna/memb/data-raw/uc-davis/16S/split-libraries-output
+RAW=/rhome/taruna/shared/taruna/memb/16S/data-raw/uc-davis/16S/fastqs
+COMBINED_BARCODES=/rhome/taruna/shared/taruna/memb/16S/data-raw/combined-barcodes
+COMBINED_FASTQS=/rhome/taruna/shared/taruna/memb/16S/data-raw/combined-fastqs
+MAP=/rhome/taruna/shared/taruna/memb/16S/qiime-files/mapping
+SPLIT=/rhome/taruna/shared/taruna/memb/16S/data-raw/split-libraries-output
 
 # Step 1 - extract barcodes from each index file (there should be two) and combine them into a single file using QIIME's extract_barcodes.py 
 extract_barcodes.py \
