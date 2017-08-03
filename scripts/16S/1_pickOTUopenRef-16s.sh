@@ -17,14 +17,14 @@ module unload python
 module load qiime
 
 # These paths are the same in the entire script
-#MAP=
+
 REF=/rhome/taruna/shared/taruna/dbs/greengenes_13_8/rep_set/97_otus.fasta
 TAXA=/rhome/taruna/shared/taruna/dbs/greengenes_13_8/taxonomy/97_otu_taxonomy.txt
 REFALIGN=/rhome/taruna/shared/taruna/dbs/greengenes_13_8/rep_set_aligned/97_otus.fasta
 
 # Change these paths according to files
 INPUT=/rhome/taruna/shared/taruna/memb/16S/data-clean/16S-bac-memb1.fa
-OUT=/rhome/taruna/shared/taruna/memb/16S/analysis-results/uclust_openref97_MEMB1_16s_25July2017
+OUT=/rhome/taruna/shared/taruna/memb/16S/analysis-results/uclust_openref97_MEMB1_16s_mergedONLY_26July2017
 PARA97=/rhome/taruna/shared/taruna/memb/16S/qiime-files/parameters/16S_openref97_rdp_gg_13_8.txt
 
 # Step1: pick otu using 97 similarity score

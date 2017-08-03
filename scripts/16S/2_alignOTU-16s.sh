@@ -18,11 +18,12 @@ module load qiime
 
 #### Step2: align sequences and remove gaps from the resulting alignment 
 
-#MAP=
+
+MAP=/rhome/taruna/shared/taruna/memb/16S/qiime-files/mapping/16S-bac-QIIME-mapping-MEmicrobiome-FINAL-26Jul17.txt 
 REF=/rhome/taruna/shared/taruna/dbs/greengenes_13_8/rep_set/97_otus.fasta
 TAXA=/rhome/taruna/shared/taruna/dbs/greengenes_13_8/taxonomy/97_otu_taxonomy.txt
 REFALIGN=/rhome/taruna/shared/taruna/dbs/greengenes_13_8/rep_set_aligned/97_otus.fasta
-OTUS=/rhome/taruna/shared/taruna/memb/16S/analysis-results/uclust_openref97_MEMB1_16s_25July2017
+OTUS=/rhome/taruna/shared/taruna/memb/16S/analysis-results/uclust_openref97_MEMB1_16s_mergedONLY_26July2017
 
 
 # align seqs with Pynast
@@ -32,3 +33,14 @@ align_seqs.py -i $OTUS/rep_set.fna \
 	--alignment_method pynast \
 	--pairwise_alignment_method uclust \
 	--min_percent_id 70.0
+	
+# removes gaps from the Pynast aligned seqs 
+filter_alignment.py -i $OTUS/pynast_aligned_seqs/rep_set_aligned.fasta \
+	-o $OTUS/pynast_aligned_seqs \
+	--suppress_lane_mask_filter
+
+
+# make a tree before filtering the BIOM table and the aligned rep sets fasta
+make_phylogeny.py -i $OTUS/pynast_aligned_seqs/rep_set_aligned_pfiltered.fasta \
+	-o $OTUS/trees/rep_set.tre \
+	--tree_method fasttree

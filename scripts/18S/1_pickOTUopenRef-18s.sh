@@ -24,7 +24,7 @@ REFALIGN=/rhome/taruna/shared/taruna/GOMRI/ref-dbs/SILVA_128_QIIME_release/rep_s
 
 # Change these paths according to files
 INPUT=/rhome/taruna/shared/taruna/memb/18S/data-clean/18S-euk-memb1.fa
-OUT=/rhome/taruna/shared/taruna/memb/18S/analysis-results/uclust_openref99_MEMB1_18s_25July2017
+OUT=/rhome/taruna/shared/taruna/memb/18S/analysis-results/uclust_openref99_MEMB1_18s_mergedONLY_26July2017
 PARA99=/rhome/taruna/shared/taruna/memb/18S/qiime-files/parameters/18S_openref99_rdp_silva128.txt
 
 # Step1: pick otu using 99 similarity score

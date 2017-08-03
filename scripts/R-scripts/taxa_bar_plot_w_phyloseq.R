@@ -1,47 +1,48 @@
-install_github(karthik/wesanderson)
 library(devtools)
 library(phyloseq)
 library(ggplot2)
 library(biomformat)
 library(wesanderson)
 
-#Sys.setlocale(locale="C")
+#import mapping file and biom tables into phyloseq
+map <- import_qiime_sample_data("/Users/Taruna/Dropbox/bik_lab/MEmicrobiome/files-4-phyloseq/16S/16S-bac-QIIME-mapping-MEmicrobiome-FINAL-26Jul17.txt")
+otu_1 <- import_biom("/Users/Taruna/Dropbox/bik_lab/MEmicrobiome/files-4-phyloseq/16S/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved.biom")
+otu_2 <- import_biom("/Users/Taruna/Dropbox/bik_lab/MEmicrobiome/files-4-phyloseq/16S/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_by_SampleSite.biom")
+biomformat::read_biom("/Users/Taruna/Dropbox/bik_lab/MEmicrobiome/files-4-phyloseq/16S/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_by_SampleSite.biom")
+# merge mapping file and biom table into a single phyloseq object
+physeq1 = merge_phyloseq(otu_1,map)
+physeq2 = merge_phyloseq(otu_2,map)
 
-### import qiime files 
-# use final OTU table containing metadata
-# use sperate taxanomy file
-# no tree file
-# merge files into phyloseq object
+# print merge phyloseq object to make sure the merging was successful
+print(physeq1)
+print(physeq2)
 
-map <- import_qiime_sample_data("/Users/Taruna/Dropbox/bik_lab/MEmicrobiome/files-4-phyloseq/16S/16S-bac-QIIME-mapping-MEmicrobiome-combined-RC.txt")
-taxonomy <- import_qiime_sample_data("/Users/Taruna/Dropbox/bik_lab/MEmicrobiome/files-4-phyloseq/16S/rep_set_tax_assignments_fixed.txt")
-dat <- read_biom("/Users/Taruna/Dropbox/bik_lab/MEmicrobiome/files-4-phyloseq/16S/otu_table_mc2.biom")
-#transform_sample_counts(function(x) {x/sum(x)} )
-otu_table <- as.data.frame(as.matrix(biom_data(dat)))
+# run some commands on the phyloseq object 
+sample_variables(physeq1)
+levels(sample_data(physeq1)$OceanRegion)
+rank_names(physeq1)
+names(physeq1) <- c("Kingdom","Phylum","Class","Order","Family","Genus","Species")
 
-OTU = otu_table(otu_table, taxa_are_rows =TRUE)
 
-taxa <- as.matrix(taxonomy)
-TAX = tax_table(taxa)
+plot_bar(physeq1, fill="Rank2", facet_grid=~OceanRegion)
+plot_bar(physeq1, x = "SampleSite", y = "Abundance", fill = "Rank2")
 
-physeq = merge_phyloseq(OTU,TAX,map)
-#physeq <- transform_sample_counts(physeq_merge, function(x) {x / sum(x)} )
 
-print(physeq)
+# make basic plots
+title = "Figure 1 16S Taxonomic Distribution based by Sample Sites"
+plot_bar(physeq1, "SampleSite", fill = "Rank2", title = title)
+plot_bar(physeq2, fill = "Rank2", title = title)
 
-physeq_pruned = prune_taxa("Phylum", 20)
-physeq.merged = merge_taxa(physeq, taxa_names(physeq)[1:5])
-print(physeq.merged)
-rank_names(physeq)
 
-par(mar=c(4,4.5,2,1))
-par(oma=c(0,0,0,0) )
-#plot_bar(physeq, fill = "Class")
 
-### relative abundance graph
-plot = plot_bar(physeq, x = "Sample", y = "Abundance", fill = "Phylum")
-plot
+# extract top 10 OTUs
+TopTenOTUs = names(sort(taxa_sums(physeq2), TRUE)[1:20])
+head(TopTenOTUs)
+physeqtop10 = prune_species(TopTenOTUs, physeq2)
+plot_bar(physeqtop10, x = "Sample", y ="Abundance", fill = "Rank2")
+plot + geom_bar(aes(color=Rank2, fill=Rank2), stat = "identity", position = "stack") 
++   scale_fill_manual(values = wes_palette(21, name = "Zissou", type = "continuous")) 
++   scale_color_manual(values = wes_palette(21, name = "Zissou", type = "continuous"))
 
-plot + geom_bar(aes(color=Phylum, fill=Phylum), stat = "identity", position = "stack") +
-  scale_fill_manual(values = wes_palette(n=63, name="FantasticFox", type = "continuous")) + 
-  scale_color_manual(values = wes_palette(n=63, name="FantasticFox", type = "continuous"))
+#g__Sphingomonas
+
