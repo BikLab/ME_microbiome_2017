@@ -1,0 +1,75 @@
+#Format Data for LEFSE
+#Download biom-2-lefse conversion script from Github
+
+git clone https://github.com/gditzler/biom2lefse.git
+
+############### 16S-bac rRNA #####################
+
+####### Nematode ID ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/uclust_openref97_MEMB1_16s_mergedONLY_26July2017/filtered-biom-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/16S-bac-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f NematodeID -o 16S-uclust97-noBadNems-NemID.txt
+
+### LEFSE RESULTS
+# Number of significantly discriminative features: 0 ( 180 ) before internal wilcoxon
+# No features with significant differences between the two classes
+# Number of discriminative features with abs LDA score > 2.0 : 0
+# NO SIGNIFICANCE
+
+####### Nematode Feeding Group ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/uclust_openref97_MEMB1_16s_mergedONLY_26July2017/filtered-biom-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/16S-bac-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f FeedingGroup -o 16S-uclust97-noBadNems-FG.txt
+
+### LEFSE RESULTS
+# Number of significantly discriminative features: 0 ( 30 ) before internal wilcoxon
+# No features with significant differences between the two classes
+# Number of discriminative features with abs LDA score > 2.0 : 0
+
+####### Nematode Family ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/uclust_openref97_MEMB1_16s_mergedONLY_26July2017/filtered-biom-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/16S-bac-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f NematodeFamily -o 16S-uclust97-noBadNems-NemFam.txt
+
+### LEFSE RESULTS
+# Number of significantly discriminative features: 0 ( 151 ) before internal wilcoxon
+# No features with significant differences between the two classes
+# Number of discriminative features with abs LDA score > 2.0 : 0
+
+####### Nematode Order ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/uclust_openref97_MEMB1_16s_mergedONLY_26July2017/filtered-biom-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/16S-bac-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f NematodeOrder -o 16S-uclust97-noBadNems-NemOrder.txt
+
+### LEFSE RESULTS
+# Number of significantly discriminative features: 0 ( 158 ) before internal wilcoxon
+# No features with significant differences between the two classes
+# Number of discriminative features with abs LDA score > 2.0 : 0
+
+####### Nematode Ocean Region ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/uclust_openref97_MEMB1_16s_mergedONLY_26July2017/filtered-biom-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/16S-bac-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f OceanRegion -o 16S-uclust97-noBadNems-Ocean.txt
+
+### LEFSE RESULTS
+# Number of significantly discriminative features: 3 ( 82 ) before internal wilcoxon
+# Number of discriminative features with abs LDA score > 2.0 : 3
+
+############### 18S-euk rRNA #####################
+
+####### Nematode ID ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/manually-filtered-18S-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-ALLmetazoaRemoved-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/18S-euk-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f NematodeID -o 18S-uclust99-noMetazoa-NemID.txt
+
+####### Nematode Feeding Group ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/manually-filtered-18S-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-ALLmetazoaRemoved-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/18S-euk-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f FeedingGroup -o 18S-uclust99-noMetazoa-NemFG.txt
+
+####### Nematode Family ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/manually-filtered-18S-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-ALLmetazoaRemoved-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/18S-euk-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f NematodeFamily -o 18S-uclust99-noMetazoa-NemFam.txt
+
+####### Nematode Order ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/manually-filtered-18S-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-ALLmetazoaRemoved-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/18S-euk-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f NematodeOrder -o 18S-uclust99-noMetazoa-NemOrder.txt
+
+####### Nematode Ocean Region ############
+
+./biom2lefse -i /Users/hollybik/Dropbox/Projects/MEMB/analysis-results/manually-filtered-18S-tables/otu_table_mc2_w_tax_BlankOTUsRemoved_BlankSamplesRemoved_NObadnems_noZeros-ALLmetazoaRemoved-JSON.biom -m /Users/hollybik/Dropbox/Projects/MEMB/qiime-files/mapping-files/18S-euk-QIIME-mapping-MEmicrobiome-FINAL-26Jul17-ForR.txt -f OceanRegion -o 18S-uclust99-noMetazoa-Ocean.txt
+
+
