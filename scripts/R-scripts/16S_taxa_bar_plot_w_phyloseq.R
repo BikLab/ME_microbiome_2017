@@ -2,7 +2,8 @@ library(devtools)
 library(phyloseq)
 library(ggplot2)
 library(biomformat)
-library(wesanderson)
+library(ape)
+library(plyr)
 
 #import mapping file into phyloseq
 map <- import_qiime_sample_data("/Users/Taruna/Dropbox/bik_lab/MEmicrobiome/files-4-phyloseq/16S/16S-bac-QIIME-mapping-MEmicrobiome-FINAL-26Jul17.txt")
@@ -44,44 +45,51 @@ physeq_Sabatieria_Setosabatieria_trans = transform_sample_counts(physeq_Sabatier
 
 #run some commands on the phyloseq object 
 sample_variables(physeq_Cervonema)
-levels(sample_data(physeq_Cervonema)$OceanRegion)
+get_taxa_unique(physeq_Cervonema, "Rank2")
 rank_names(physeq_Cervonema)
 
 ############################# Rank2 ############################# 
 #plot based on raw Rank2 (Phylum) data
 
-pdf('~/Desktop/Cervonema_Rank2.pdf')
-plot_bar(physeq_Cervonema_trans, fill="Rank2")
+tiff(file = "~/Desktop/Cervonema_Rank2.tiff",
+     width = 11.5, height = 8, units = "in", res = 300)
+plot
 dev.off()
 
-pdf('~/Desktop/Chromadorida_Desmodorida_Rank2.pdf')
-plot_bar(physeq_Chromadorida_Desmodorida_trans, fill="Rank2")
+tiff(file = "~/Desktop/Chromadorida_Desmodorida_Rank2.tiff",
+     width = 11.5, height = 8, units = "in", res = 300)
+plot
 dev.off()
 
-pdf('~/Desktop/Chromadoridae_Rank2.pdf')
-plot_bar(physeq_Chromadoridae_trans, fill="Rank2")
+tiff(file = "~/Desktop/Chromadoridae_Rank2.tiff",
+     width = 11.5, height = 8, units = "in", res = 300)
+plot
 dev.off()
 
-pdf('~/Desktop/Desmoscolecidae_Rank2.pdf')
-plot_bar(physeq_Desmoscolecidae_trans, fill="Rank2")
+tiff(file = "~/Desktop/Desmoscolecidae_Rank2.tiff",
+     width = 11.5, height = 8, units = "in", res = 300)
+plot
 dev.off()
 
-pdf('~/Desktop/Enoplida_Rank2.pdf')
-plot_bar(physeq_Enoplida_trans, fill="Rank2")
+tiff(file = "~/Desktop/Enoplida_Rank2.tiff",
+     width = 11.5, height = 8, units = "in", res = 300)
+plot
 dev.off()
 
-pdf('~/Desktop/Monhysterida_Rank2.pdf')
-plot_bar(physeq_Monhysterida_trans, fill="Rank2")
+tiff(file = "~/Desktop/Monhysterida_Rank2.tiff",
+     width = 11.5, height = 8, units = "in", res = 300)
+plot
 dev.off()
 
-pdf('~/Desktop/Oxystominidae_Rank2.pdf')
-plot_bar(physeq_Oxystominidae_trans, fill="Rank2")
+tiff(file = "~/Desktop/Oxystominidae_Rank2.tiff",
+     width = 11.5, height = 8, units = "in", res = 300)
+plot
 dev.off()
 
-pdf('~/Desktop/Sabatieria_Setosabatieria_Rank2.pdf')
-plot_bar(physeq_Sabatieria_Setosabatieria_trans, fill="Rank2")
+tiff(file = "~/Desktop/Sabatieria_Setosabatieria_Rank2.tiff",
+     width = 11.5, height = 8, units = "in", res = 300)
+plot
 dev.off()
-
 
 
 ######################### Remove unobserved OTUs - Rank2 ######################### 
@@ -89,7 +97,9 @@ any(taxa_sums(physeq_Cervonema_trans) == 0)
 sum(taxa_sums(physeq_Cervonema_trans) == 0)
 
 physeq_Cervonema_trans_trimmed = prune_taxa(taxa_sums(physeq_Cervonema_trans) > 0, physeq_Cervonema_trans)
-plot_bar(physeq_Cervonema_trans_trimmed, x = "Sample", y ="Abundance", fill = "Rank2")
+pb_cervonema <- plot_bar(physeq_Cervonema_trans_trimmed, x = "Sample", y ="Abundance", fill = "Rank2")
+gb_cervonema <- pb_cervonema+geom_bar(aes(color=Rank2, fill=Rank2), stat = "identity", position="stack")
+gb_cervonema
 
 
 ############################# Remove unobserved OTUs - top taxa - Rank2 #############################
@@ -97,6 +107,6 @@ plot_bar(physeq_Cervonema_trans_trimmed, x = "Sample", y ="Abundance", fill = "R
 #extract top 10 OTUs - I don't know if this is really doing top ten taxa. Whatever the legends come out like, I'd say use that number being the top X.
 TopTenOTUs = names(sort(taxa_sums(physeq_Cervonema_trans_trimmed), TRUE)[1:20])
 head(TopTenOTUs)
-physeqtop10_cervonema = prune_species(TopTenOTUs, physeq_Cervonema_trans_trimmed)
+physeqtop10_cervonema = prune_taxa(TopTenOTUs, physeq_Cervonema_trans_trimmed)
 plot_bar(physeqtop10_cervonema, x = "Sample", y ="Abundance", fill = "Rank2")
 
